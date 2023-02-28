@@ -1,0 +1,43 @@
+package com.example.progettoofficina2
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.progettoofficina2.adapters.CustomerAdapter
+import com.example.progettoofficina2.db.DbOfficina
+import com.example.progettoofficina2.services.CustomerDao
+class CustomerListFragment : Fragment() {
+
+    private lateinit var customerDao: CustomerDao
+    private lateinit var recyclerView: RecyclerView
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_customer_list, container, false)
+        recyclerView = view.findViewById(R.id.customer_list_recycler_view)
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val db = DbOfficina.getDatabase(requireContext())
+        customerDao = db.customerDao()
+
+        val customersLiveData = customerDao.getAll()
+        val adapter = CustomerAdapter(customersLiveData)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
+}
+
+
+
+

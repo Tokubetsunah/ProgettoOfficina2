@@ -1,41 +1,42 @@
 package com.example.progettoofficina2.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.RecyclerView
 import com.example.progettoofficina2.R
 import com.example.progettoofficina2.entities.Customer
 
-//adapter for customers
-class CustomerAdapter(context: Context, private val customers: List<Customer>) : ArrayAdapter<Customer>(context, 0, customers) {
-    
-    //creates the view for the listview
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        
-        //get the customer
-        val customer = customers[position]
-        
-        //inflate the view
-        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.customer_item, parent, false)
-        
-        //initialize the textviews
-        val tvId = view.findViewById<TextView>(R.id.tvIdCustomer)
-        val tvName = view.findViewById<TextView>(R.id.tvName)
-        val tvSurname = view.findViewById<TextView>(R.id.tvSurname)
-        val tvPhone = view.findViewById<TextView>(R.id.tvPhone)
-        val tvEmail = view.findViewById<TextView>(R.id.tvEmail)
-        
-        //set the textviews
-        tvId.text = customer.id.toString()
-        tvName.text = customer.name
-        tvSurname.text = customer.surname
-        tvPhone.text = customer.phone
-        tvEmail.text = customer.email
-        
-        //return the view
-        return view
+class CustomerAdapter(private val customersLiveData: LiveData<List<Customer>>) : RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
+
+    class CustomerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val nameTextView: TextView = itemView.findViewById(R.id.customer_name_text_view)
+        val surnameTextView: TextView = itemView.findViewById(R.id.customer_surname_text_view)
+        val phoneTextView: TextView = itemView.findViewById(R.id.customer_phone_text_view)
+        val emailTextView: TextView = itemView.findViewById(R.id.customer_email_text_view)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.customer_item, parent, false)
+        return CustomerViewHolder(itemView)
+    }
+
+    override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
+        val customers = customersLiveData.value
+        if (customers != null && customers.isNotEmpty()) {
+            val customer = customers[position]
+            holder.nameTextView.text = customer.name
+            holder.surnameTextView.text = customer.surname
+            holder.phoneTextView.text = customer.phone
+            holder.emailTextView.text = customer.email
+        }
+    }
+
+    override fun getItemCount(): Int {
+        val customers = customersLiveData.value
+        return if (customers != null) customers.size else 0
     }
 }
+

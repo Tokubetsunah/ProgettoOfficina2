@@ -1,31 +1,27 @@
 package com.example.progettoofficina2.services
 
 // import all the needed classes
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.progettoofficina2.entities.Car
 
 // car dao interface, with all the needed queries
 @Dao
 interface CarDao {
+
+    //get all cars 
     @Query("SELECT * FROM car")
-    fun getAll(): List<Car>
+    fun getAll(): LiveData<List<Car>>
 
-    @Query("SELECT * FROM car WHERE id IN (:carIds)")
-    fun loadAllByIds(carIds: IntArray): List<Car>
-
-    @Query("SELECT * FROM car WHERE owner = :owner")
-    fun loadAllByOwner(owner: Int): List<Car>
-
-    @Query("SELECT * FROM car WHERE plate = :plate")
-    fun loadByPlate(plate: String): Car
-
+    //insert a car
     @Insert
-    abstract fun insert(car: Car)
+    suspend fun insert(car: Car)
 
+    //delete a car
     @Delete
-    fun delete(car: Car)
+    suspend fun delete(car: Car)
 
-    @Update
-    fun update(car: Car)
-
+    //get by id
+    @Query("SELECT * FROM car WHERE id = :id")
+    fun getById(id: Int): LiveData<Car>
 }

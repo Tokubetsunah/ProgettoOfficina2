@@ -12,12 +12,10 @@ data class Car(
     var id: Int = 0,
     @ColumnInfo(name = "plate")
     var plate: String,
-    @ColumnInfo(name = "brand")
-    var brand: String,
     @ColumnInfo(name = "model")
     var model: String,
     @ColumnInfo(name = "year")
-    var year: Int,
-    @ColumnInfo(name = "owner")
-    var owner: String
+    var year: String,
+    @ColumnInfo(name = "ownerId")
+    var ownerId: Int
 ) : Serializable

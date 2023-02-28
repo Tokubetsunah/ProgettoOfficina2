@@ -13,7 +13,7 @@ import com.example.progettoofficina2.services.CustomerDao
 import com.example.progettoofficina2.services.InterventionDao
 
 @Database(entities = [Customer::class, Car::class, Intervention::class], version = 1, exportSchema = false)
-abstract class Data : RoomDatabase() {
+abstract class DbOfficina : RoomDatabase() {
     abstract fun customerDao(): CustomerDao
     abstract fun carDao(): CarDao
     abstract fun interventionDao(): InterventionDao
@@ -22,9 +22,9 @@ abstract class Data : RoomDatabase() {
     companion object {
 
         @Volatile
-        private var INSTANCE: Data? = null
+        private var INSTANCE: DbOfficina? = null
 
-        fun getDatabase(context: Context): Data {
+        fun getDatabase(context: Context): DbOfficina {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -32,7 +32,7 @@ abstract class Data : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    Data::class.java,
+                    DbOfficina::class.java,
                     "datimacchine"
                 ).build()
                 INSTANCE = instance

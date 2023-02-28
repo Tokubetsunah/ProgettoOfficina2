@@ -1,40 +1,43 @@
 package com.example.progettoofficina2.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.RecyclerView
 import com.example.progettoofficina2.R
 import com.example.progettoofficina2.entities.Intervention
 
-//adapter for interventions
-class InterventionAdapter(context: Context, private val interventions: List<Intervention>) : ArrayAdapter<Intervention>(context, 0, interventions) {
-        //creates the view for the listview
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            
-        //get the intervention
-        val intervention = interventions[position]
-        
-        //inflate the view
-        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.intervention_item, parent, false)
-        
-        //initialize the textviews
-        val tvId = view.findViewById<TextView>(R.id.tvIdIntervention)
-        val tvCar = view.findViewById<TextView>(R.id.tvCar)
-        val tvDate = view.findViewById<TextView>(R.id.tvDate)
-        val tvKm = view.findViewById<TextView>(R.id.tvHours)
-        val tvDescription = view.findViewById<TextView>(R.id.tvDescription)
+class InterventionAdapter(private var interventionsLiveData: LiveData<List<Intervention>>) : RecyclerView.Adapter<InterventionAdapter.InterventionViewHolder>() {
 
-        //set the textviews
-        tvId.text = intervention.id.toString()
-        tvCar.text = intervention.car.toString()
-        tvDate.text = intervention.date
-        tvKm.text = intervention.hours.toString()
-        tvDescription.text = intervention.description
+    class InterventionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val carTextView: TextView = itemView.findViewById(R.id.carTextView)
+        val hoursTextView: TextView = itemView.findViewById(R.id.hoursTextView)
+        val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
+        val startDateTextView: TextView = itemView.findViewById(R.id.dateTextView)
+        val finishDateTextView: TextView = itemView.findViewById(R.id.date2TextView)
+    }
 
-        //return the view
-        return view
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InterventionViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.intervention_item, parent, false)
+        return InterventionViewHolder(itemView)
+    }
+
+    override fun onBindViewHolder(holder: InterventionViewHolder, position: Int) {
+        val interventions = interventionsLiveData.value
+        if (interventions != null && interventions.isNotEmpty()) {
+            val intervention = interventions[position]
+            holder.carTextView.text = intervention.car.toString()
+            holder.hoursTextView.text = intervention.hours
+            holder.descriptionTextView.text = intervention.description
+            holder.startDateTextView.text = intervention.startDate
+            holder.finishDateTextView.text = intervention.finishDate
+        }
+    }
+
+    override fun getItemCount(): Int {
+        val interventions = interventionsLiveData.value
+        return if (interventions != null) interventions.size else 0
     }
 }
