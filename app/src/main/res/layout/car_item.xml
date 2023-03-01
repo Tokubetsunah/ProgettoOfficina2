@@ -7,7 +7,7 @@
     android:paddingEnd="8dp"
     android:paddingTop="12dp"
     android:paddingBottom="12dp"
-    android:background="@color/darkblue">
+    android:background="@drawable/rounded_background">
 
     <TextView
         android:id="@+id/plateTextView"
