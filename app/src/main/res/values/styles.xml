@@ -1,4 +1,5 @@
 <resources>
-
-
+    <style name="CustomFont">
+        <item name="android:fontFamily">Comic sans</item>
+    </style>
 </resources>
