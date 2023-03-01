@@ -1,43 +1,37 @@
 package com.example.progettoofficina2.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.lifecycle.LiveData
-import androidx.recyclerview.widget.RecyclerView
 import com.example.progettoofficina2.R
 import com.example.progettoofficina2.entities.Intervention
 
-class InterventionAdapter(private var interventionsLiveData: LiveData<List<Intervention>>) : RecyclerView.Adapter<InterventionAdapter.InterventionViewHolder>() {
+class InterventionAdapter(context: Context, private val interventionsLiveData: LiveData<List<Intervention>>) : ArrayAdapter<Intervention>(context, 0) {
 
-    class InterventionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val carTextView: TextView = itemView.findViewById(R.id.carTextView)
-        val hoursTextView: TextView = itemView.findViewById(R.id.hoursTextView)
-        val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
-        val startDateTextView: TextView = itemView.findViewById(R.id.dateTextView)
-        val finishDateTextView: TextView = itemView.findViewById(R.id.date2TextView)
+    init {
+        interventionsLiveData.value?.let { addAll(it) }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InterventionViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.intervention_item, parent, false)
-        return InterventionViewHolder(itemView)
-    }
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val intervention = getItem(position)
+        var view = convertView ?: LayoutInflater.from(context).inflate(R.layout.intervention_item, parent, false)
 
-    override fun onBindViewHolder(holder: InterventionViewHolder, position: Int) {
-        val interventions = interventionsLiveData.value
-        if (interventions != null && interventions.isNotEmpty()) {
-            val intervention = interventions[position]
-            holder.carTextView.text = intervention.car.toString()
-            holder.hoursTextView.text = intervention.hours
-            holder.descriptionTextView.text = intervention.description
-            holder.startDateTextView.text = intervention.startDate
-            holder.finishDateTextView.text = intervention.finishDate
-        }
-    }
+        val carTextView = view.findViewById<TextView>(R.id.carTextView)
+        val hoursTextView = view.findViewById<TextView>(R.id.hoursTextView)
+        val descriptionTextView = view.findViewById<TextView>(R.id.descriptionTextView)
+        val startDateTextView = view.findViewById<TextView>(R.id.dateTextView)
+        val finishDateTextView = view.findViewById<TextView>(R.id.date2TextView)
 
-    override fun getItemCount(): Int {
-        val interventions = interventionsLiveData.value
-        return if (interventions != null) interventions.size else 0
+        carTextView.text = intervention?.car.toString()
+        hoursTextView.text = intervention?.hours
+        descriptionTextView.text = intervention?.description
+        startDateTextView.text = intervention?.startDate
+        finishDateTextView.text = intervention?.finishDate
+
+        return view
     }
 }
