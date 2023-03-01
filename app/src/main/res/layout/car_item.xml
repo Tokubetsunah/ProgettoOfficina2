@@ -9,13 +9,6 @@
     android:paddingBottom="12dp"
     android:background="@drawable/rounded_background">
 
-    <TextView
-        android:id="@+id/plateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Plate: "
-        android:textColor="@color/white"
-        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/plateValueTextView"
@@ -29,7 +22,7 @@
         android:id="@+id/modelTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Model: "
+        android:text="-"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:layout_marginStart="16dp" />
@@ -46,7 +39,7 @@
         android:id="@+id/yearTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Year: "
+        android:text="-"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:layout_marginStart="16dp" />

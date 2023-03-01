@@ -22,6 +22,9 @@ class AddCarFragment : Fragment() {
     private lateinit var ownerIdEditText: EditText
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        if (savedInstanceState != null) {
+            return super.onCreateView(inflater, container, savedInstanceState)
+        }
         val view = inflater.inflate(R.layout.fragment_add_car, container, false)
 
         val db = DbOfficina.getDatabase(requireContext())
@@ -38,7 +41,7 @@ class AddCarFragment : Fragment() {
             val year = yearEditText.text.toString()
             val ownerId = ownerIdEditText.text.toString().toInt()
 
-            val car = Car(0, plate, model, year, ownerId)
+            val car = Car(plate, model, year, ownerId)
             lifecycleScope.launch {
                 carDao.insert(car)
                 requireActivity().supportFragmentManager.popBackStack()
@@ -48,3 +51,5 @@ class AddCarFragment : Fragment() {
         return view
     }
 }
+
+

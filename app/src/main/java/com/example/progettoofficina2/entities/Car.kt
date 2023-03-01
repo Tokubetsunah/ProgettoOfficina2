@@ -18,4 +18,6 @@ data class Car(
     var year: String,
     @ColumnInfo(name = "ownerId")
     var ownerId: Int
-) : Serializable
+) : Serializable {
+    constructor(plate: String, model: String, year: String, ownerId: Int) : this(0, plate, model, year, ownerId)
+}
