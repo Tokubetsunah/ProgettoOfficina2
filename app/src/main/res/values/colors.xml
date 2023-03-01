@@ -15,7 +15,16 @@
     <color name="carButtonColor">#FF0000</color>
     <color name="interventionButtonColor">#00FF00</color>
     <color name="customerButtonColor">#FFFF00</color>
+
+    <!-- for the cars -->
+    <color name="lightblue">#64B5F6</color>
     <color name="blue">#2196F3</color>
+    <color name="darkblue">#1976D2</color>
+
+    <!-- for the customers -->
     <color name="green">#4CAF50</color>
+
+    <!-- for the cars -->
     <color name="orange">#FF9800</color>
+
 </resources>

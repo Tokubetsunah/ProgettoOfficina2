@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightblue"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -8,36 +9,115 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Car"
+        android:textColor="@color/white"
         android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/plateEditText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Plate Number" />
+        android:orientation="vertical"
+        android:layout_marginTop="32dp">
 
-    <EditText
-        android:id="@+id/modelEditText"
+        <TextView
+            android:id="@+id/plateLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plate Number"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/plateEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter plate number"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Model" />
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
 
-    <EditText
-        android:id="@+id/yearEditText"
+        <TextView
+            android:id="@+id/modelLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Model"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/modelEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter model"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Year" />
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
 
-    <EditText
-        android:id="@+id/ownerIdEditText"
+        <TextView
+            android:id="@+id/yearLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Year"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/yearEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter year"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Owner ID" />
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add" />
+        <TextView
+            android:id="@+id/ownerIdLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Owner ID"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
+        <EditText
+            android:id="@+id/ownerIdEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter owner ID"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/darkblue"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:layout_marginTop="32dp"
+            android:elevation="4dp" />
+
+    </LinearLayout>
 </LinearLayout>
+
